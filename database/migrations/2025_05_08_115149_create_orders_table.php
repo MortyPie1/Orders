@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_type')->default('normal'); //normal , urgent
-            $table->string('order_status')->default('pending'); //pending , out_for_delivery , delivered
+            $table->string('order_status')->default('pending'); //pending , out_for_delivery , delivered , failed
+            $table->date('delivery_date')->nullable();
             $table->foreignId('driver_id')->constrained('drivers');
             $table->foreignId('admin_id')->constrained('admins');
-            $table->timestamps();
+            $table->foreignId('user_id')->constrained('users');
+            $table->timestamps('date');
         });
     }
 
