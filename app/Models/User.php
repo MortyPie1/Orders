@@ -24,12 +24,22 @@ class User extends Authenticatable
     ];
 
     public function orders(){
-        return $this->hasMany(Order::class);
+        return $this->morphMany(Order::class, 'orderable');
     }
+
     public function histories(){
-        return $this->hasMany(History::class);
+        return $this->morphMany(History::class, 'historyable');
     }
-    public function admin(){
-        return $this->belongsTo(Admin::class);
-    }
+
+
+//
+//    public function orders(){
+//        return $this->hasMany(Order::class);
+//    }
+//    public function histories(){
+//        return $this->hasMany(History::class);
+//    }
+//    public function admin(){
+//        return $this->belongsTo(Admin::class);
+//    }
 }

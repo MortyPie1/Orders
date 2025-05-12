@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained('orders');
-            $table->foreignId('driver_id')->constrained('drivers');
-            $table->foreignId('order_type')->constrained('orders');
-            $table->foreignId('order_status')->constrained('orders');
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('date')->constrained('orders');
+            $table->morphs('historyable');
+//            $table->foreignId('order_id')->constrained('orders');
+//            $table->foreignId('driver_id')->constrained('drivers');
+//            $table->foreignId('user_id')->constrained('users');
+            $table->date('delivery_date');
+            $table->timestamps();
         });
     }
 

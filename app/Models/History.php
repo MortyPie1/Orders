@@ -20,4 +20,8 @@ class History extends Model
 
 
     ];
+    public function historyable()
+    {
+        return $this->morphTo();
+    }
 }
