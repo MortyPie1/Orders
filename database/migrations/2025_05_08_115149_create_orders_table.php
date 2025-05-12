@@ -13,16 +13,14 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('driver_id')->constrained('drivers');
             $table->enum('type',['normal','urgent'])->default('normal'); //normal, urgent
             $table->enum('status',['delivered','failed'])->default('delivered'); // delivered, failed
             $table->date('delivery_date')->nullable();
-            $table->morphs('orderable');
-//            $table->bigInteger('orderable_id')->unsigned()->nullable();
-//            $table->string('orderable_type')->nullable();
-//            $table->foreignId('driver_id')->constrained('drivers');
-//            $table->foreignId('admin_id')->constrained('admins');
-//            $table->foreignId('user_id')->constrained('users');
-            $table->timestamps();
+            $table->foreignId('admin_id')->constrained('admins');
+            $table->foreignId('user_id')->constrained('users');
+            $table->date('created_at');
+            $table->date('updated_at');
         });
     }
 
