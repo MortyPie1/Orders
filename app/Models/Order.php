@@ -17,4 +17,8 @@ class Order extends Model
         'order_date',
 
     ];
+    public function orderable()
+    {
+        return $this->morphTo();
+    }
 }

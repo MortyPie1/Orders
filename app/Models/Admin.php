@@ -31,11 +31,18 @@ class Admin extends Authenticatable implements JWTSubject
             'password' => 'hashed',
         ];
     }
+    public function orders(){
+        return $this->morphMany(Order::class, 'orderable');
+    }
+
+    public function histories(){
+        return $this->morphMany(History::class, 'historyable');
+    }
 
 
 
     //relations
-
+/*
     public function orders(){
         return $this->hasMany(Order::class);
     }
@@ -48,6 +55,7 @@ class Admin extends Authenticatable implements JWTSubject
     public function histories(){
         return $this->hasMany(History::class);
     }
+*/
 
 
 
