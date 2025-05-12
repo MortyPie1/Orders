@@ -16,7 +16,7 @@ class Driver extends Authenticatable implements JWTSubject
     protected $table = 'drivers';
     protected $fillable = [
         'name',
-        'email',
+        'phone',
         'vehicle_number',
         'password',
     ];
