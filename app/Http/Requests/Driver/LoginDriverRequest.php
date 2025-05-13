@@ -11,7 +11,7 @@ class LoginDriverRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class LoginDriverRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'phone' => 'required',
+            'password' => 'required|min:8',
         ];
     }
 }

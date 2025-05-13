@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Admin\LoginAdminRequest;
+use App\Http\Requests\Driver\LoginDriverRequest;
 use App\Http\Requests\Driver\CreateDriverRequest;
 use App\Models\Driver;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Http\Request;
 
 class DriverAuthController extends \Illuminate\Routing\Controller
 {
     public function __construct(){
-        $this->middleware('auth:driver', ['except' => ['login', 'register']]);
+        $this->middleware('auth', ['except' => ['login', 'register']]);
     }
     public function register(CreateDriverRequest $request){
         $driver = $request->validated();
@@ -19,9 +18,9 @@ class DriverAuthController extends \Illuminate\Routing\Controller
         return response()->json(['message' => 'Driver created successfully.'], response::HTTP_CREATED);
     }
 
-    public function login(LoginAdminRequest $request){
+    public function login(LoginDriverRequest $request){
         $driver = $request->validated();
-        $token = auth('driver')->attempt($driver);
+        $token = auth()->attempt($driver);
         if (!$token) {
             return response()->json(['error' => 'Unauthorized'], response::HTTP_UNAUTHORIZED);
         }
@@ -36,7 +35,7 @@ class DriverAuthController extends \Illuminate\Routing\Controller
     }
 
     public function logout(){
-        auth('driver')->logout();
+        auth()->logout();
         return response()->json(['message' => 'Successfully logged out']);
     }
 }

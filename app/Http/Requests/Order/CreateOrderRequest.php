@@ -23,12 +23,12 @@ class CreateOrderRequest extends FormRequest
     {
         return [
             'driver_id' => 'required|exists:drivers,id',
+            'admin_id' => 'required|exists:admins,id',
+            'user_id' => 'required|exists:users,id',
+            'order_name' => 'required|string',
             'type' => 'required|in:urgent,normal',
             'status'=>'required|in:delivered,failed',
-            'delivery_date'=>'required|date',
-            'orderable_id'=>'required|integer',
-            'orderable_type'=>'required|string',
-            'created_at'=>'required|date',
+            'delivery_date'=>'required',
         ];
     }
 }

@@ -12,13 +12,25 @@ class Order extends Model
     use HasFactory , Notifiable;
     protected $table = 'orders';
     protected $fillable = [
-        'order_type',
-        'order_status',
-        'order_date',
-
+        'order_name',
+        'type',
+        'status',
+        'admin_id',
+        'driver_id',
+        'user_id',
+        'delivery_date'
     ];
-    public function orderable()
-    {
-        return $this->morphTo();
+
+    public function admin(){
+       return $this->belongsTo(Admin::class);
     }
+
+    public function driver(){
+        return  $this->belongsTo(Driver::class);
+    }
+
+    public function user(){
+        return  $this->belongsTo(User::class);
+    }
+
 }

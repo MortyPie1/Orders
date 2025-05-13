@@ -33,28 +33,22 @@ class Driver extends Authenticatable implements JWTSubject
 
     //relations
 
+
+
+
+
     public function orders(){
-        return $this->morphMany(Order::class, 'orderable');
+        return $this->hasMany(Order::class);
     }
-
+    public function users(){
+        return $this->hasMany(User::class);
+    }
     public function histories(){
-        return $this->morphMany(History::class, 'historyable');
+        return $this->hasMany(History::class);
     }
-
-
-
-//    public function orders(){
-//        return $this->hasMany(Order::class);
-//    }
-//    public function users(){
-//        return $this->hasMany(User::class);
-//    }
-//    public function histories(){
-//        return $this->hasMany(History::class);
-//    }
-//    public function admin(){
-//        return $this->belongsTo(Admin::class);
-//    }
+    public function admin(){
+        return $this->belongsTo(Admin::class);
+    }
 
 
 
