@@ -11,7 +11,7 @@ class UpdateOrderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class UpdateOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'driver_id' => 'required|exists:drivers,id',
+            'user_id' => 'required|exists:users,id',
+            'order_name' => 'required|string',
+            'type' => 'required|in:urgent,normal',
+            'status'=>'required|in:delivered,failed',
+            'delivery_date'=>'nullable|date',
+
         ];
     }
 }

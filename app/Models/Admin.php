@@ -36,7 +36,7 @@ class Admin extends Authenticatable implements JWTSubject
 
 
     //relations
-/*
+
     public function orders(){
         return $this->hasMany(Order::class);
     }
@@ -49,7 +49,7 @@ class Admin extends Authenticatable implements JWTSubject
     public function histories(){
         return $this->hasMany(History::class);
     }
-*/
+
 
 
 

@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Http\Request;
 
 
 class UserController extends Controller

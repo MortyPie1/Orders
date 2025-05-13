@@ -20,8 +20,19 @@ class History extends Model
 
 
     ];
-    public function historyable()
+    public function admin()
     {
-        return $this->morphTo();
+        return $this->belongsTo(User::class);
+    }
+    public function driver(){
+        return $this->belongsTo(Driver::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function order(){
+        return $this->belongsTo(Order::class);
     }
 }

@@ -6,8 +6,6 @@ use App\Http\Requests\Admin\CreateAdminRequest;
 use App\Http\Requests\Admin\LoginAdminRequest;
 use App\Models\Admin;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 
 
