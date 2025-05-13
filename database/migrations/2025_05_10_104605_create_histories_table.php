@@ -13,14 +13,11 @@ return new class extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
-            $table->string('order_name');
-            $table->enum('type',['normal','urgent'])->default('normal'); //normal, urgent
-            $table->enum('status',['delivered','failed'])->default('delivered'); // delivered, failed
+            $table->enum('status',['pending','delivered','failed'])->default('pending'); // pending, delivered, failed
             $table->foreignId('admin_id')->constrained('admins');
             $table->foreignId('order_id')->constrained('orders');
-            $table->foreignId('driver_id')->constrained('drivers');
-            $table->foreignId('user_id')->constrained('users');
-            $table->timestamp('delivery_date');
+            $table->foreignId('driver_id')->nullable()->constrained('drivers');
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

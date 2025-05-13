@@ -13,14 +13,19 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('order_name');
+            $table->string('name');
+            $table->string('description')->nullable();
+            $table->integer('price');
+            $table->integer('height');
+            $table->integer('width');
             $table->enum('type',['normal','urgent'])->default('normal'); //normal, urgent
             $table->enum('status',['delivered','failed'])->default('delivered'); // delivered, failed
             $table->foreignId('admin_id')->constrained('admins');
-            $table->foreignId('driver_id')->constrained('drivers');
-            $table->foreignId('user_id')->constrained('users');
-            $table->timestamp('delivery_date')->nullable();
+            $table->foreignId('driver_id')->nullable()->constrained('drivers');
+            $table->foreignId('user_id')->nullable()->constrained('users');
+            $table->timestamp('delivered_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
