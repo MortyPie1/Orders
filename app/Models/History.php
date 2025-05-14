@@ -11,13 +11,11 @@ class History extends Model
     use HasFactory;
     protected $table = 'histories';
     protected $fillable = [
-        'order_id',
-        'date',
-        'driver_id',
+        'status',
         'admin_id',
+        'driver_id',
         'user_id',
-        'order_status',
-
+        'order_id',
 
     ];
     public function admin()
@@ -35,4 +33,5 @@ class History extends Model
     public function order(){
         return $this->belongsTo(Order::class);
     }
+
 }

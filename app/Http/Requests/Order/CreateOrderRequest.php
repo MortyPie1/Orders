@@ -22,13 +22,17 @@ class CreateOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'driver_id' => 'required|exists:drivers,id',
-            'admin_id' => 'required|exists:admins,id',
-            'user_id' => 'required|exists:users,id',
-            'order_name' => 'required|string',
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'height' => 'required',
+            'width' => 'required',
             'type' => 'required|in:urgent,normal',
-            'status'=>'required|in:delivered,failed',
-            'delivery_date'=>'required',
+            'status'=>'required|in:pending,delivered,failed',
+            'admin_id' => 'required|exists:admins,id',
+            'driver_id' => 'nullable|exists:drivers,id',
+            'user_id' => 'nullable|exists:users,id',
+            'delivered_at' => 'nullable|date',
         ];
     }
 }

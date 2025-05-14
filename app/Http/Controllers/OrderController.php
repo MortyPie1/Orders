@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Order\CreateOrderRequest;
 use App\Http\Requests\Order\UpdateOrderRequest;
 use App\Models\Order;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Symfony\Component\HttpFoundation\Response;
+use App\Providers\AuthServiceProvider;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 
 class OrderController extends Controller
 {
+    use AuthorizesRequests, DispatchesJobs;
     public function index(){
-        $orders = Order::with('admin','driver','user')->get();
+        $orders = Order::with('histories')->get();
         if($orders->isEmpty()){
             return response()->json(['message'=>'No orders found'],response::HTTP_NOT_FOUND);
         }
@@ -19,6 +24,7 @@ class OrderController extends Controller
     }
 
     public function store(CreateOrderRequest $request){
+        $this->authorize('store', Order::class);
         $order = $request->validated();
         Order::create($order);
         return response()->json(['message'=>'Order created'],response::HTTP_CREATED);
@@ -26,6 +32,7 @@ class OrderController extends Controller
 
     public function update(UpdateOrderRequest $request, $id){
         $order = Order::where('id', $id)->first();
+        $this->authorize('update', $order);
         if(!$order){
             return response()->json(['message'=>'No order found'],response::HTTP_NOT_FOUND);
         }

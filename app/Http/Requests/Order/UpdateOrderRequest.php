@@ -22,13 +22,10 @@ class UpdateOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'driver_id' => 'required|exists:drivers,id',
-            'user_id' => 'required|exists:users,id',
-            'order_name' => 'required|string',
-            'type' => 'required|in:urgent,normal',
-            'status'=>'required|in:delivered,failed',
-            'delivery_date'=>'nullable|date',
-
+            'status'=>'required|in:pending,delivered,failed',
+            'driver_id' => 'nullable|exists:drivers,id',
+            'user_id' => 'nullable|exists:users,id',
+            'delivered_at' => 'nullable|date',
         ];
     }
 }

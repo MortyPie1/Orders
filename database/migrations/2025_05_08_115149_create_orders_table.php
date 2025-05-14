@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('height');
             $table->integer('width');
             $table->enum('type',['normal','urgent'])->default('normal'); //normal, urgent
-            $table->enum('status',['delivered','failed'])->default('delivered'); // delivered, failed
+            $table->enum('status',['pending','delivered','failed'])->default('delivered'); // delivered, failed
             $table->foreignId('admin_id')->constrained('admins');
             $table->foreignId('driver_id')->nullable()->constrained('drivers');
             $table->foreignId('user_id')->nullable()->constrained('users');

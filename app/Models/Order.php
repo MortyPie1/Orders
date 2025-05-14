@@ -4,21 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+
+
+
 
 class Order extends Model
 {
     /** @use HasFactory<\Database\Factories\OrderFactory> */
-    use HasFactory , Notifiable;
+    use HasFactory , Notifiable ,softDeletes;
     protected $table = 'orders';
     protected $fillable = [
-        'order_name',
+        'name',
+        'description',
+        'price',
+        'height',
+        'width',
         'type',
         'status',
         'admin_id',
         'driver_id',
         'user_id',
-        'delivery_date'
+        'delivered_at',
     ];
 
     public function admin(){
@@ -32,5 +40,31 @@ class Order extends Model
     public function user(){
         return  $this->belongsTo(User::class);
     }
+
+    public function histories(){
+        return  $this->hasMany(History::class);
+    }
+
+    protected static function booted(){
+        static::updated(function($order){
+            History::create([
+                'status' => $order->status,
+                'admin_id' => $order->admin_id,
+                'driver_id' => $order->driver_id,
+                'user_id' => $order->user_id,
+                'order_id' => $order->id,
+            ]);
+        });
+        static::created(function($order){
+            History::create([
+                'status' => $order->status,
+                'admin_id' => $order->admin_id,
+                'driver_id' => $order->driver_id,
+                'user_id' => $order->user_id,
+                'order_id' => $order->id,
+            ]);
+        });
+    }
+
 
 }
